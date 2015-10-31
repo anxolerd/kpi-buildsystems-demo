@@ -12,6 +12,7 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 var plumber = require('gulp-plumber');
+var stylus = require('gulp-stylus');
 
 gulp.task('scripts', [], function() {
     gulp.src('src/js/**/*.js')
@@ -24,8 +25,20 @@ gulp.task('scripts', [], function() {
         .pipe(gulp.dest('build/js'));
 });
 
-gulp.task('watch', ['scripts'], function(){
-   gulp.watch('src/js/**/*.js', ['scripts']);
+gulp.task('styles', [], function() {
+    gulp.src('src/stylus/main.styl')
+        .pipe(stylus({
+            compress: true
+        }))
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(gulp.dest('build/css'));
 });
 
-gulp.task('default', ['scripts', 'watch']);
+gulp.task('watch', ['scripts'], function(){
+    gulp.watch('src/js/**/*.js', ['scripts']);
+    gulp.watch('src/stylus/**/*.styl', ['styles']);
+});
+
+gulp.task('default', ['scripts', 'styles', 'watch']);
