@@ -8,17 +8,12 @@
  */
 
 var gulp = require('gulp');
+var uglify = require('gulp-uglify');
 
-gulp.task('hello-world', [], function() {
-    console.log('it works!');
+gulp.task('scripts', [], function() {
+    gulp.src('src/js/**/*.js')
+        .pipe(uglify())
+        .pipe(gulp.dest('build/js'));
 });
 
-gulp.task('dependent', ['hello-world'], function(){
-    console.log('i have dependencies');
-});
-
-gulp.task('pinkie', [], function(){
-   console.log('Pinkie Pie');
-});
-
-gulp.task('default', ['pinkie', 'dependent']);
+gulp.task('default', ['scripts']);
