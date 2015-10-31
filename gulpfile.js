@@ -13,6 +13,24 @@ var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 var plumber = require('gulp-plumber');
 var stylus = require('gulp-stylus');
+var imagemin = require('gulp-imagemin');
+
+gulp.task('html', [], function() {
+    gulp.src('src/**/*.html')
+        .pipe(gulp.dest('build'));
+});
+
+gulp.task('images', [], function() {
+    return (
+        gulp.src('src/img/*.+(png|jpg|gif)')
+            .pipe(imagemin({
+                optimizationLevel: 3,
+                progessive: true,
+                interlaced: true
+            }))
+            .pipe(gulp.dest('build/img'))
+    );
+});
 
 gulp.task('scripts', [], function() {
     gulp.src('src/js/**/*.js')
@@ -36,9 +54,11 @@ gulp.task('styles', [], function() {
         .pipe(gulp.dest('build/css'));
 });
 
-gulp.task('watch', ['scripts'], function(){
+gulp.task('watch', ['scripts', 'styles', 'html', 'images'], function() {
     gulp.watch('src/js/**/*.js', ['scripts']);
     gulp.watch('src/stylus/**/*.styl', ['styles']);
+    gulp.watch('src/**/*.html', ['html']);
+    gulp.watch('src/img/**/*.+(png|jpg|gif)', ['images']);
 });
 
-gulp.task('default', ['scripts', 'styles', 'watch']);
+gulp.task('default', ['scripts', 'styles', 'html', 'images', 'watch']);
