@@ -17,6 +17,7 @@ var imagemin = require('gulp-imagemin');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var del = require('del');
+var ghPages = require('gulp-gh-pages');
 
 gulp.task('html', [], function() {
     gulp.src('src/**/*.html')
@@ -75,11 +76,20 @@ gulp.task('clean', [], function(callback) {
     return del(['build'], callback);
 });
 
-gulp.task('watch', ['scripts', 'styles', 'html', 'images'], function() {
+gulp.task('build', ['scripts', 'styles', 'html', 'images']);
+
+gulp.task('deploy', ['build'], function() {
+    return (
+        gulp.src('./build/**/*')
+            .pipe(ghPages())
+    );
+});
+
+gulp.task('watch', ['build'], function() {
     gulp.watch('src/js/**/*.js', ['scripts']);
     gulp.watch('src/stylus/**/*.styl', ['styles']);
     gulp.watch('src/**/*.html', ['html']);
     gulp.watch('src/img/**/*.+(png|jpg|gif)', ['images']);
 });
 
-gulp.task('default', ['scripts', 'styles', 'html', 'images', 'browser-sync', 'watch']);
+gulp.task('default', ['build', 'browser-sync', 'watch']);
