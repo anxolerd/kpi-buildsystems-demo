@@ -16,6 +16,7 @@ var stylus = require('gulp-stylus');
 var imagemin = require('gulp-imagemin');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
+var del = require('del');
 
 gulp.task('html', [], function() {
     gulp.src('src/**/*.html')
@@ -68,6 +69,10 @@ gulp.task('browser-sync', [], function() {
             }
         });
     });
+});
+
+gulp.task('clean', [], function(callback) {
+    return del(['build'], callback);
 });
 
 gulp.task('watch', ['scripts', 'styles', 'html', 'images'], function() {
