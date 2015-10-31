@@ -1,0 +1,74 @@
+/*
+ * ----------------------------------------------------------------------------
+ * "THE BEER-WARE LICENSE" (Revision 42):
+ * <me.olexandr.kovalchuk@gmail.com> wrote this file.  As long as you retain this notice you
+ * can do whatever you want with this stuff. If we meet some day, and you think
+ * this stuff is worth it, you can buy me a beer in return.  Olexandr Kovalchuk
+ * ----------------------------------------------------------------------------
+ */
+
+header
+  background-color $primary-color
+  color $primary-color-text
+  height 56px
+  left 0
+  overflow hidden
+  padding-left 16px
+  padding-right 16px
+  position fixed
+  right 0
+  top 0
+  z-index 1
+
+  mixin-box-shadow 0 2px 5px $shadow-color
+  mixin-transition 0.3s
+
+  @media (min-width 768px)
+    height 64px
+
+  &::before
+    content ""
+    display inline-block
+    height 100%
+    vertical-align middle
+
+  &>container
+    width 270px
+    @media (min-width 480px)
+      width 430px
+    @media (min-width 768px)
+      width 660px
+    @media (min-width 1024px)
+      width 940px
+
+  a
+    text-decoration none
+    color $primary-color-text
+
+  nav
+    display inline-block
+    vertical-align middle
+    right 0
+    &>a
+      padding 0 8px
+
+  div
+    display inline-block
+    vertical-align middle
+    &:first-child
+      height $width
+      width 48px
+      @media(min-width 768px)
+        display none
+    &:last-child
+      display none
+      float right
+      height 56px
+      @media(min-width 768px)
+        display inline-block
+        height 64px
+      &::before
+        content ""
+        display inline-block
+        height 100%
+        vertical-align middle
