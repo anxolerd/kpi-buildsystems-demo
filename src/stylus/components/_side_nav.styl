@@ -20,8 +20,16 @@
   mixin-transform translateX(-250px)
   mixin-transition .3s
   &>nav
-    &>a
-      padding 0 16px
+    font-size 16px
+    margin-top 16px
+    padding 0 16px
+    a
+      display block
+      height 32px
+      text-decoration none
+      color $accent-color
+      &:hover
+        text-decoration underline
   &>.header-title
     color $primary-color-dark
     background-color $primary-color-light
