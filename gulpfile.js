@@ -22,4 +22,8 @@ gulp.task('scripts', [], function() {
         .pipe(gulp.dest('build/js'));
 });
 
-gulp.task('default', ['scripts']);
+gulp.task('watch', ['scripts'], function(){
+   gulp.watch('src/js/**/*.js', ['scripts']);
+});
+
+gulp.task('default', ['scripts', 'watch']);
