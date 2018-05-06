@@ -1,6 +1,6 @@
 # Build systems demo app
 
-This is a demo application for my [slides about build systems](http://anxolerd.github.io/kpi-slides-buildsystems).
+This is a demo application for my [slides about build systems](http://anxolerd.github.io/talks/kpi-buildsystems).
 This app was remastered after the demonstration to look better and have a verbose guide.
 
 ## Some conventions
